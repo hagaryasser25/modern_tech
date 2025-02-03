@@ -1,3 +1,18 @@
 {
-    "register" : "انشاء حساب"
+    "register" : "انشاء حساب",
+    "full_name": "الاسم بالكامل",
+    "hint_name": "John Doe",
+    "email": "البريد الالكتروني",
+    "hint_email": "JohnDoe@gmail.com",
+    "phone_number": "رقم الهاتف",
+    "hint_phone": "0102020121",
+    "password": "كلمة المرور",
+    "hint_password": "********",
+    "already_have_email": "لدي حساب بالفعل؟",
+    "login": "تسجيل دخول",
+    "forget_password": "هل نسيت كلمة المرور؟",
+    "login_by": "أو سجل عن طريق",
+    "continue_with_google": "Continue with Google",
+    "don't_have_account": "ليس لدي حساب بالفعل؟"
+    
 }

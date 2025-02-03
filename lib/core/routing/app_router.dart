@@ -1,4 +1,3 @@
-
 import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
@@ -6,15 +5,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 //import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modern_tech/core/routing/routes.dart';
+import 'package:modern_tech/features/login/ui/login_screen.dart';
 import 'package:modern_tech/features/registertaion/ui/registeration_screen.dart';
 
 import '../../features/splash/splash_screen.dart';
 
-
-
 class AppRouter {
   Route generateRoute(RouteSettings settings) {
-  //  final arguments = settings.arguments;
+    //  final arguments = settings.arguments;
 
     log('Navigating to: ${settings.name}');
 
@@ -25,6 +23,8 @@ class AppRouter {
       case Routes.registerationScreen:
         return _buildRoute(const RegisterationScreen());
 
+      case Routes.loginScreen:
+        return _buildRoute(const LoginScreen());
 
       default:
         return _buildRoute(
@@ -46,4 +46,3 @@ class AppRouter {
     }
   }
 }
-

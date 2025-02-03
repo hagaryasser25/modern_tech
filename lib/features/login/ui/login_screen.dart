@@ -1,19 +1,20 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:modern_tech/core/consts/dimensions_constants.dart';
 import 'package:modern_tech/core/consts/string_consts.dart';
-import 'package:modern_tech/core/helpers/extensions.dart';
-import 'package:modern_tech/core/routing/routes.dart';
 import 'package:modern_tech/core/theming/color_manager.dart';
 import 'package:modern_tech/core/widgets/go_button.dart';
 import 'package:modern_tech/core/widgets/input_text.dart';
+import 'package:modern_tech/core/widgets/line.dart';
 import 'package:modern_tech/core/widgets/subtitle_big_text.dart';
+import 'package:modern_tech/core/widgets/subtitle_text.dart';
 import 'package:modern_tech/core/widgets/title_text.dart';
 
-class RegisterationScreen extends StatelessWidget {
-  const RegisterationScreen({super.key});
+import '../../../core/widgets/google_button.dart';
+
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,14 +34,14 @@ class RegisterationScreen extends StatelessWidget {
                 ),
               ),
               child: Padding(
-                padding: EdgeInsets.only(top: edge * 0.7),
+                padding: EdgeInsets.only(top: edge),
                 child: Align(
                     alignment: Alignment.topCenter,
                     child: Image.asset('$imageUrl/app_icon.jpeg')),
               ),
             ),
             Positioned(
-              top: 170.h,
+              top: 230.h,
               left: edge * 1.5,
               right: edge * 1.5,
               child: Container(
@@ -56,35 +57,11 @@ class RegisterationScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
-                          height: edge * 2,
-                        ),
-                        SvgPicture.asset("$imageUrl/arrow_black.svg"),
-                        SizedBox(
-                          height: edge * 0.5,
-                        ),
-                        TitleText(text: "register".tr()),
-                        SizedBox(
-                          height: edge * 0.5,
-                        ),
-                        InputText(
-                          title: "full_name".tr(),
-                          hint: "hint_name".tr(),
-                         // controller: context.read<EditProfileCubit>().password,
-                        ),
-                        SizedBox(
-                          height: edge * 0.5,
+                          height: edge * 1.5,
                         ),
                         InputText(
                           title: "email".tr(),
                           hint: "hint_email".tr(),
-                         // controller: context.read<EditProfileCubit>().password,
-                        ),
-                        SizedBox(
-                          height: edge * 0.5,
-                        ),
-                        InputText(
-                          title: "phone_number".tr(),
-                          hint: "hint_phone".tr(),
                          // controller: context.read<EditProfileCubit>().password,
                         ),
                         SizedBox(
@@ -97,24 +74,37 @@ class RegisterationScreen extends StatelessWidget {
                          // controller: context.read<EditProfileCubit>().password,
                         ),
                          SizedBox(
-                          height: edge * 2,
+                          height: edge * 0.5,
                         ),
-                        GoButton(fun: (){
-                          
-                        }, titleKey: "register".tr()),
+                        TitleText(text: "forget_password".tr(),color: lightBlue,fontSize: 12,),
+                         SizedBox(
+                          height: edge * 1.5,
+                        ),
+                        GoButton(fun: (){}, titleKey: "login".tr()),
+                        SizedBox(height: edge,),
+                        Row(
+                          children: [
+                            const Expanded(child: Line()),
+                            SizedBox(width: edge,),
+                            SubtitleText(text: "login_by".tr()),
+                            SizedBox(width: edge,),
+                            const Expanded(child: Line())
+
+                          ],
+                        ),
+                        SizedBox(height: edge,),
+                        GoogleButton(fun: (){}, titleKey: "continue_with_google".tr()),
+                        
                         SizedBox(height: edge,),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            SubtitleBigText(text: "already_have_email".tr()),
+                            SubtitleBigText(text: "don't_have_account".tr()),
                             SizedBox(width: edge * 0.3,),
-                            GestureDetector(
-                              onTap: (){
-                                context.pushNamed(Routes.loginScreen);
-                              },
-                              child: TitleText(text: "login".tr(),color: lightBlue,fontSize: 12,))
+                            TitleText(text: "register".tr(),color: lightBlue,fontSize: 12,)
                           ],
                         )
+
                       ],
                     ),
                   )),
