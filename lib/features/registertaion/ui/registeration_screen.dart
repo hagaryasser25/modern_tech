@@ -101,7 +101,7 @@ class RegisterationScreen extends StatelessWidget {
                         ),
                         GoButton(fun: (){
                           
-                        }, titleKey: "register".tr()),
+                        }, titleKey: "register".tr(),hasArrow: true,),
                         SizedBox(height: edge,),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,

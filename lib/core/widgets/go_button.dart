@@ -8,7 +8,6 @@ import 'package:modern_tech/core/widgets/title_text.dart';
 
 import '../consts/dimensions_constants.dart';
 
-
 class GoButton extends StatelessWidget {
   const GoButton(
       {required this.fun,
@@ -27,6 +26,7 @@ class GoButton extends StatelessWidget {
       this.btColor,
       this.borderColor,
       this.textColor,
+      this.hasArrow,
       this.enable = true,
       super.key});
 
@@ -47,6 +47,7 @@ class GoButton extends StatelessWidget {
   final bool? vertical;
   final bool gradient;
   final Widget? icon;
+  final bool? hasArrow;
 
   @override
   Widget build(BuildContext context) {
@@ -61,8 +62,7 @@ class GoButton extends StatelessWidget {
         width: w ?? width.w,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color:
-              enable ? btColor ?? primaryColor : disableColor,
+          color: enable ? btColor ?? primaryColor : disableColor,
           borderRadius: BorderRadius.circular(curvy ?? curvyRadius),
         ),
         child: loading
@@ -76,14 +76,17 @@ class GoButton extends StatelessWidget {
                       if (icon != null) const SizedBox(height: 5),
                       Row(
                         children: [
-                          SvgPicture.asset("$imageUrl/arrow.svg"),
-                          SizedBox(width: edge,),
+                          hasArrow == true
+                              ? SvgPicture.asset("$imageUrl/arrow.svg")
+                              : Container(),
+                          SizedBox(
+                            width: edge,
+                          ),
                           TitleText(
                             text: titleKey,
                             color: textColor ?? backgroundColor,
                             fontSize: fontSize ?? 15,
                           ),
-                          
                         ],
                       )
                     ],
@@ -96,14 +99,17 @@ class GoButton extends StatelessWidget {
                       if (icon != null) const SizedBox(width: 2),
                       Row(
                         children: [
-                          SvgPicture.asset("$imageUrl/arrow.svg"),
-                          SizedBox(width: edge,),
+                          hasArrow == true
+                              ? SvgPicture.asset("$imageUrl/arrow.svg")
+                              : Container(),
+                          SizedBox(
+                            width: edge,
+                          ),
                           TitleText(
                             text: titleKey,
                             color: textColor ?? backgroundColor,
                             fontSize: fontSize ?? 15,
                           ),
-                          
                         ],
                       ),
                     ],

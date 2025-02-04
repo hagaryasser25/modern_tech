@@ -10,9 +10,25 @@
     "hint_password": "********",
     "already_have_email": "لدي حساب بالفعل؟",
     "login": "تسجيل دخول",
-    "forget_password": "هل نسيت كلمة المرور؟",
+    "forget_password_question": "هل نسيت كلمة المرور؟",
     "login_by": "أو سجل عن طريق",
     "continue_with_google": "Continue with Google",
-    "don't_have_account": "ليس لدي حساب بالفعل؟"
+    "don't_have_account": "ليس لدي حساب بالفعل؟",
+    "forget_password": "نسيت كلمة المرور",
+    "enter_your_email": "أدخل البريد الالكتروني لاعادة تعيين كلمة المرور",
+    "your_email": "بريدك الالكتروني",
+    "reset_password": "اعادة تعيين كلمة مرور",
+    "check_your_email": "تحقق من بريدك الإلكتروني",
+    "enter_otp": "أدخل الرمز المكون من 5 أرقام المذكور في البريد ",
+    "check_otp": "التحقق من الرمز",
+    "don't_recieve": "لم يصلك الرمز بعد؟",
+    "resend_otp": "إرسال مرة أخرى",
+    "make_new_password": "قم بتعيين كلمة مرور جديدة",
+    "new_password_description": "قم بإنشاء كلمة مرور جديدة. تأكد من أنها تختلف عن كلمات المرور السابقة ",
+    "new_password": "كلمة المرور الجديدة",
+    "enter_new_password": "ادخل كلمة مرور جديدة",
+    "confirm_new_password": "تأكيد كلمة المرور",
+    "enter_confirm_password": "أعد كتابه كلمة المرور",
+    "update_password": "تحديث كلمة المرور"
     
 }
