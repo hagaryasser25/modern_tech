@@ -8,6 +8,7 @@ class RegisterBodyRequest {
   String? phone;
   String? password;
   String? name;
+
   @JsonKey(name: "password_confirmation")
   String? confirmPassword;
 

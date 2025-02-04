@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:modern_tech/core/consts/dimensions_constants.dart';
@@ -11,6 +12,9 @@ import 'package:modern_tech/core/widgets/go_button.dart';
 import 'package:modern_tech/core/widgets/input_text.dart';
 import 'package:modern_tech/core/widgets/subtitle_big_text.dart';
 import 'package:modern_tech/core/widgets/title_text.dart';
+
+import '../logic/register_cubit.dart';
+import '../logic/register_states.dart';
 
 class RegisterationScreen extends StatelessWidget {
   const RegisterationScreen({super.key});
@@ -51,7 +55,7 @@ class RegisterationScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Padding(
-                    padding: EdgeInsets.only(right: edge * 2,left: edge * 2),
+                    padding: EdgeInsets.only(right: edge * 2, left: edge * 2),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -69,7 +73,7 @@ class RegisterationScreen extends StatelessWidget {
                         InputText(
                           title: "full_name".tr(),
                           hint: "hint_name".tr(),
-                         // controller: context.read<EditProfileCubit>().password,
+                          controller: context.read<RegisterCubit>().name,
                         ),
                         SizedBox(
                           height: edge * 0.5,
@@ -77,7 +81,7 @@ class RegisterationScreen extends StatelessWidget {
                         InputText(
                           title: "email".tr(),
                           hint: "hint_email".tr(),
-                         // controller: context.read<EditProfileCubit>().password,
+                          controller: context.read<RegisterCubit>().email,
                         ),
                         SizedBox(
                           height: edge * 0.5,
@@ -85,7 +89,7 @@ class RegisterationScreen extends StatelessWidget {
                         InputText(
                           title: "phone_number".tr(),
                           hint: "hint_phone".tr(),
-                         // controller: context.read<EditProfileCubit>().password,
+                          controller: context.read<RegisterCubit>().phoneNumber,
                         ),
                         SizedBox(
                           height: edge * 0.5,
@@ -94,25 +98,43 @@ class RegisterationScreen extends StatelessWidget {
                           title: "password".tr(),
                           hint: "hint_password".tr(),
                           isPassword: true,
-                         // controller: context.read<EditProfileCubit>().password,
+                          controller: context.read<RegisterCubit>().password,
                         ),
-                         SizedBox(
+                        SizedBox(
                           height: edge * 2,
                         ),
-                        GoButton(fun: (){
-                          
-                        }, titleKey: "register".tr(),hasArrow: true,),
-                        SizedBox(height: edge,),
+                        BlocBuilder<RegisterCubit, RegisterStates>(
+                          buildWhen: (previous, current) => previous != current,
+                          builder: (context, state) {
+                            return                         GoButton(
+                          fun: () {
+                            context.read<RegisterCubit>().register();
+                          },
+                          titleKey: "register".tr(),
+                          hasArrow: true,
+                        );
+                          },
+                        ),
+
+                        SizedBox(
+                          height: edge,
+                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             SubtitleBigText(text: "already_have_email".tr()),
-                            SizedBox(width: edge * 0.3,),
+                            SizedBox(
+                              width: edge * 0.3,
+                            ),
                             GestureDetector(
-                              onTap: (){
-                                context.pushNamed(Routes.loginScreen);
-                              },
-                              child: TitleText(text: "login".tr(),color: lightBlue,fontSize: 12,))
+                                onTap: () {
+                                  context.pushNamed(Routes.loginScreen);
+                                },
+                                child: TitleText(
+                                  text: "login".tr(),
+                                  color: lightBlue,
+                                  fontSize: 12,
+                                ))
                           ],
                         )
                       ],

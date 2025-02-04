@@ -12,12 +12,10 @@ class RegisterRepo {
       RegisterBodyRequest registerRequestBody) async {
     try {
       var response = await _apiService.register(registerRequestBody);
-      if (response.authToken == null) {
-        return ApiResult.failure(response.message ?? "",
-            );
-      }
+      print('success');
       return ApiResult.success(response);
     } catch (error) {
+      print(error);
       return ApiResult.failure(error.toString());
     }
   }

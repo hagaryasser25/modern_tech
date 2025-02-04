@@ -10,5 +10,6 @@ abstract class ApiService {
   factory ApiService(Dio dio, {String baseUrl}) = _ApiService;
 
   @POST(ApiConstants.register)
-  Future<RegisterBodyResponse> register(RegisterBodyRequest registerRequestBody);
+  Future<RegisterBodyResponse> register(
+      @Body() RegisterBodyRequest registerRequestBody);
 }
