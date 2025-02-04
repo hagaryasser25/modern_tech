@@ -1,6 +1,9 @@
+import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:modern_tech/features/registertaion/data/model/register_body_response.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../services/navigation_service.dart';
@@ -34,7 +37,7 @@ class AppUtilities {
     showIntroduction =
         await getSavedString("showIntroduction", 'true') == 'true';
     _languageCode = await getSavedString("languageCode", getDeviceLanguage());
-    // _serverToken = await getSavedString("serverToken", '');
+     _serverToken = await getSavedString("serverToken", '');
   }
 
   bool? _isLTR;
@@ -114,7 +117,7 @@ class AppUtilities {
     _isLogin = x;
 
     if (!x) {
-      // _loginData = LoginResponse();
+       _loginData = RegisterBodyResponse();
       setSavedString("userData", '');
       setSavedString("serverToken", '');
       _serverToken = null;
@@ -122,39 +125,34 @@ class AppUtilities {
     setSavedString("isLogin", x ? 'true' : 'false');
   }
 
-  //LoginResponse? _loginData = LoginResponse();
+  RegisterBodyResponse? _loginData = RegisterBodyResponse();
 
-/*
-  LoginResponse get loginData {
+
+  RegisterBodyResponse get loginData {
     return _loginData!;
   }
  
 
-  set loginData(LoginResponse x) {
+  set loginData(RegisterBodyResponse x) {
     serverToken = "Bearer ${x.authToken ?? ""}";
     _loginData = x;
     setSavedString("userData", jsonEncode(x.toJson()));
     log("saved");
   }
-   */
+   
 
   Future<void> _getSavedData() async {
     _isLogin = await getSavedString("isLogin", 'false') == 'true';
 
     _serverToken = await getSavedString("serverToken", '');
 
-/*
+
     if (await getSavedString('userData', '') != '') {
       log(await getSavedString('userData', ''));
-      _loginData = LoginResponse.fromJson(
+      _loginData = RegisterBodyResponse.fromJson(
           jsonDecode(await getSavedString('userData', '')));
     }
-    if (_loginData?.userData?.isParent == 0) {
-      _appType = AppType.student;
-    } else if (_loginData?.userData?.isParent == 1) {
-      _appType = AppType.parent;
-    }
-    */
+    
   }
 
   Future<bool> setSavedString(String key, String value) async {

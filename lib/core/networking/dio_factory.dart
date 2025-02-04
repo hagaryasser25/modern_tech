@@ -23,10 +23,9 @@ class DioFactory {
         ..options.connectTimeout = timeOut
         ..options.receiveTimeout = timeOut
         ..options.headers = {
-          "x-api-key":
-              '9699ac56afd6204e2f4051990965sfsdfgsdfg564rt68ikjjk7er5rtbr6um67',
           "lang": AppUtilities().languageCode,
-          "os-type": Platform.isAndroid ? 'android' : "ios"
+          "os-type": Platform.isAndroid ? 'android' : "ios",
+          "Accept": "application/json"
         };
 
       addDioInterceptor();
