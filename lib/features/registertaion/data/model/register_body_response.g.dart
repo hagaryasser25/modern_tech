@@ -10,7 +10,9 @@ RegisterBodyResponse _$RegisterBodyResponseFromJson(
         Map<String, dynamic> json) =>
     RegisterBodyResponse(
       status: json['status'] as bool?,
-      message: json['message'] as String?,
+      message: json['message'] == null
+          ? null
+          : Name.fromJson(json['message'] as Map<String, dynamic>),
       authToken: json['authToken'] as String?,
       data: json['data'] == null
           ? null

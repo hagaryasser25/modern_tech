@@ -1,7 +1,10 @@
 //import 'package:another_flushbar/flushbar.dart';
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:modern_tech/core/helpers/app_utilities.dart';
+import 'package:modern_tech/core/theming/color_manager.dart';
+import 'package:modern_tech/core/widgets/subtitle_text.dart';
 
 import '../models/language_model.dart';
 import '../routing/direction_routing.dart';
@@ -128,24 +131,24 @@ extension Navigation on BuildContext {
 
   void pop() => Navigator.of(this).pop();
 
-/*
+
   showErrorToast(String msg) {
     Flushbar(
       messageText: Row(
         children: [
           Expanded(
-              child: NormalText(
+              child: SubtitleText(
             text: msg,
             align: TextAlign.start,
-            color: secondFontColor.getColor(),
+            color: backgroundColor,
           )),
-          Icon(
+          const Icon(
             Icons.close,
-            color: secondFontColor.getColor(),
+            color: backgroundColor,
           )
         ],
       ),
-      messageColor: secondFontColor.getColor(),
+      messageColor: backgroundColor,
       messageSize: 18,
       // titleColor: AppUI.mainColor,
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
@@ -166,15 +169,15 @@ extension Navigation on BuildContext {
      messageText: Row(
        children: [
          Expanded(
-             child: NormalText(
+             child: SubtitleText(
                text: message,
                align: TextAlign.start,
-               color: secondFontColor.getColor(),
+               color: backgroundColor,
              )),
 
        ],
      ),
-     messageColor: secondFontColor.getColor(),
+     messageColor:backgroundColor,
      messageSize: 18,
      // titleColor: AppUI.mainColor,
      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
@@ -183,13 +186,13 @@ extension Navigation on BuildContext {
      duration: const Duration(seconds: 2),
      flushbarPosition: FlushbarPosition.BOTTOM,
      barBlur: .1,
-     backgroundColor: mainBlue,
-     borderColor: mainBlue,
+     backgroundColor: primaryColor,
+     borderColor: primaryColor,
      margin: const EdgeInsets.all(8),
      borderRadius: BorderRadius.circular(10),
    ).show(this);
  }
- */
+ 
 }
 
 extension NameExtension on Name {

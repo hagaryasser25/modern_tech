@@ -1,4 +1,7 @@
 class ApiConstants {
-  static const String apiBaseUrl = 'https://moderntech.limarjewelary.com/';
+  static const String apiBaseUrl = 'https://modern-tech.msagencypro.com/';
   static const String register = "register";
+  static const String login = "login";
+  static const String sendOtp = "passwords/send-otp";
+  static const String checkOtp = "passwords/check-otp";
 }

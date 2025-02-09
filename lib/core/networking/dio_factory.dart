@@ -25,7 +25,8 @@ class DioFactory {
         ..options.headers = {
           "lang": AppUtilities().languageCode,
           "os-type": Platform.isAndroid ? 'android' : "ios",
-          "Accept": "application/json"
+          "Accept": "application/json",
+          "x-api-key": "base64:W6z0/2T4jic3dbpJd2saeN5tTx1u6R6muVILKk7Hcms="
         };
 
       addDioInterceptor();

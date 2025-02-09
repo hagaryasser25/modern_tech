@@ -6,14 +6,15 @@ import 'package:modern_tech/core/helpers/extensions.dart';
 import 'package:modern_tech/core/theming/color_manager.dart';
 import 'package:modern_tech/core/widgets/go_button.dart';
 import 'package:modern_tech/core/widgets/input_text_general.dart';
+import 'package:modern_tech/core/widgets/subtitle_text.dart';
 import 'package:modern_tech/core/widgets/title_text.dart';
 
-import '../../core/consts/dimensions_constants.dart';
-import '../../core/consts/string_consts.dart';
-import '../../core/routing/routes.dart';
+import '../../../core/consts/dimensions_constants.dart';
+import '../../../core/consts/string_consts.dart';
+import '../../../core/routing/routes.dart';
 
-class ForgetPasswordScreen extends StatelessWidget {
-  const ForgetPasswordScreen({super.key});
+class ResetPasswordScreen extends StatelessWidget {
+  const ResetPasswordScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +26,7 @@ class ForgetPasswordScreen extends StatelessWidget {
         padding: EdgeInsets.all(edge * 2.5),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             SizedBox(
               height: edge,
@@ -34,26 +36,36 @@ class ForgetPasswordScreen extends StatelessWidget {
               height: edge * 0.8,
             ),
             TitleText(
-              text: "forget_password".tr(),
-              fontSize: 16,
+              text: "make_new_password".tr(),
+              fontSize: 19,
             ),
             SizedBox(
               height: edge * 0.5,
             ),
-            TitleText(
-              text: "enter_your_email".tr(),
-              fontSize: 13,
+            SubtitleText(
+              text: "new_password_description".tr(),
+              fontSize: 14,
               color: greyColor,
+              align: TextAlign.start,
             ),
             SizedBox(height: edge),
             InputTextGeneral(
-              title: "your_email".tr(),
-              hint: "your_email".tr(),
+              title: "new_password".tr(),
+              hint: "enter_new_password".tr(),
             ),
-            SizedBox(height: edge * 2.5,),
-            GoButton(fun: (){
-              context.pushNamed(Routes.forgetPasswordOtp);
-            }, titleKey: "reset_password".tr())
+            SizedBox(height: edge),
+            InputTextGeneral(
+              title: "confirm_new_password".tr(),
+              hint: "enter_confirm_password".tr(),
+            ),
+            SizedBox(
+              height: edge * 8,
+            ),
+            GoButton(
+                fun: () {
+                  context.pushNamed(Routes.forgetPasswordOtp);
+                },
+                titleKey: "update_password".tr())
           ],
         ),
       ),

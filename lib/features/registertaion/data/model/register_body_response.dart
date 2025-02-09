@@ -1,11 +1,12 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:modern_tech/core/models/language_model.dart';
 
 part 'register_body_response.g.dart';
 
 @JsonSerializable()
 class RegisterBodyResponse {
   bool? status;
-  String? message;
+  Name? message;
   String? authToken;
   Data? data;
 

@@ -1,17 +1,17 @@
+import 'package:modern_tech/features/login/data/model/login_body_request.dart';
 import 'package:modern_tech/features/registertaion/data/model/register_body_response.dart';
 
 import '../../../../core/networking/api_result.dart';
 import '../../../../core/networking/api_service.dart';
-import '../model/register_body_request.dart';
 
-class RegisterRepo {
+class LoginRepo {
   final ApiService _apiService;
 
-  RegisterRepo(this._apiService);
+  LoginRepo(this._apiService);
   Future<ApiResult<RegisterBodyResponse>> register(
-      RegisterBodyRequest registerRequestBody) async {
+      LoginBodyRequest loginRequestBody) async {
     try {
-      var response = await _apiService.register(registerRequestBody);
+      var response = await _apiService.login(loginRequestBody);
       return ApiResult.success(response);
     } catch (error) {
       return ApiResult.failure(error.toString());

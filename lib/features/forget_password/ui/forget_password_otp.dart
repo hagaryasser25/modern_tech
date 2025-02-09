@@ -9,8 +9,8 @@ import 'package:modern_tech/core/widgets/go_button.dart';
 import 'package:modern_tech/core/widgets/title_text.dart';
 import 'package:otp_pin_field/otp_pin_field.dart';
 
-import '../../core/consts/dimensions_constants.dart';
-import '../../core/consts/string_consts.dart';
+import '../../../core/consts/dimensions_constants.dart';
+import '../../../core/consts/string_consts.dart';
 
 class ForgetPasswordOtp extends StatelessWidget {
   const ForgetPasswordOtp({super.key});

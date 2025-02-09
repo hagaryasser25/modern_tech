@@ -6,12 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 //import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modern_tech/core/routing/routes.dart';
-import 'package:modern_tech/features/forget_password/forget_password_screen.dart';
-import 'package:modern_tech/features/forget_password/reset_password_screen.dart';
+import 'package:modern_tech/features/forget_password/cubit/forget_password_cubit.dart';
+import 'package:modern_tech/features/forget_password/ui/forget_password_screen.dart';
+import 'package:modern_tech/features/forget_password/ui/reset_password_screen.dart';
+import 'package:modern_tech/features/login/cubit/login_cubit.dart';
 import 'package:modern_tech/features/login/ui/login_screen.dart';
 import 'package:modern_tech/features/registertaion/ui/registeration_screen.dart';
 
-import '../../features/forget_password/forget_password_otp.dart';
+import '../../features/forget_password/ui/forget_password_otp.dart';
 import '../../features/registertaion/logic/register_cubit.dart';
 import '../../features/splash/splash_screen.dart';
 import '../di/dependency_injection.dart';
@@ -26,8 +28,7 @@ class AppRouter {
       case Routes.splashScreen:
         return _buildRoute(const SplashScreen());
 
-
-        case Routes.registerationScreen:
+      case Routes.registerationScreen:
         return _buildRoute(
           BlocProvider(
             create: (_) => getIt<RegisterCubit>(),
@@ -36,18 +37,26 @@ class AppRouter {
         );
 
       case Routes.loginScreen:
-        return _buildRoute(const LoginScreen());
+        return _buildRoute(
+          BlocProvider(
+            create: (_) => getIt<LoginCubit>(),
+            child: const LoginScreen(),
+          ),
+        );
 
       case Routes.forgetPasswordScreen:
-        return _buildRoute(const ForgetPasswordScreen());
+        return _buildRoute(
+           BlocProvider(
+            create: (_) => getIt<ForgetPasswordCubit>(),
+            child: const ForgetPasswordScreen(),
+          ),
+        );
 
       case Routes.forgetPasswordOtp:
         return _buildRoute(const ForgetPasswordOtp());
 
       case Routes.resetPasswordScreen:
         return _buildRoute(const ResetPasswordScreen());
-
-      
 
       default:
         return _buildRoute(

@@ -29,6 +29,11 @@
     "enter_new_password": "ادخل كلمة مرور جديدة",
     "confirm_new_password": "تأكيد كلمة المرور",
     "enter_confirm_password": "أعد كتابه كلمة المرور",
-    "update_password": "تحديث كلمة المرور"
+    "update_password": "تحديث كلمة المرور",
+    "enter_full_name": "ادخل الأسم بالكامل",
+    "enter_email": "ادخل البريد الألكترونى",
+    "enter_phone": "ادخل رقم الهاتف",
+    "enter_password": "ادخل كلمة المرور",
+    "empty_input": "جميع الحقول مطلوبة"
     
 }
