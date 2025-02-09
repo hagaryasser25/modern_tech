@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:modern_tech/core/helpers/extensions.dart';
+import 'package:modern_tech/core/models/otp_arguments.dart';
 import 'package:modern_tech/core/theming/color_manager.dart';
 import 'package:modern_tech/core/widgets/go_button.dart';
 import 'package:modern_tech/core/widgets/input_text_general.dart';
@@ -66,23 +67,34 @@ class ForgetPasswordScreen extends StatelessWidget {
                 listenWhen: (previous, current) => previous != current,
                 builder: (context, current) {
                   return GoButton(
-                      fun: () {
-                        context.read<ForgetPasswordCubit>().sendOtp();
-                      },
-                      titleKey: "reset_password".tr());
+                    fun: () {
+                      context.read<ForgetPasswordCubit>().sendOtp();
+                    },
+                    titleKey: "reset_password".tr(),
+                    loading: current is Loading,
+                  );
                 },
                 listener: (context, current) {
                   current.whenOrNull(
                     emptyInput: () {
                       context.showErrorToast("empty_input".tr());
                     },
-
                     invalidInput: () {
-                      context.showErrorToast('${context.read<ForgetPasswordCubit>().sendOtpResponse?.message?.getNameByLanguageCode()}');
+                      context.showErrorToast(
+                          '${context.read<ForgetPasswordCubit>().sendOtpResponse?.message?.getNameByLanguageCode()}');
                     },
-
                     success: (response) async {
-                      context.pushNamedAndRemoveUntil(Routes.forgetPasswordOtp, predicate: false);
+                      context.pushNamedAndRemoveUntil(Routes.forgetPasswordOtp,
+                          predicate: false,
+                          arguments: OtpArguments(
+                              token: context
+                                  .read<ForgetPasswordCubit>()
+                                  .sendOtpResponse
+                                  ?.token,
+                              email: context
+                                  .read<ForgetPasswordCubit>()
+                                  .user
+                                  .text));
                     },
                     error: (error) {
                       WidgetsBinding.instance.addPostFrameCallback((timeStamp) {

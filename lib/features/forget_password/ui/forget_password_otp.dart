@@ -1,22 +1,27 @@
 import 'package:easy_localization/easy_localization.dart' as easy;
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:modern_tech/core/helpers/extensions.dart';
-import 'package:modern_tech/core/routing/routes.dart';
 import 'package:modern_tech/core/theming/color_manager.dart';
 import 'package:modern_tech/core/widgets/go_button.dart';
 import 'package:modern_tech/core/widgets/title_text.dart';
+import 'package:modern_tech/features/forget_password/data/model/check_otp_response.dart';
+import 'package:modern_tech/features/forget_password/data/model/send_otp_response.dart';
 import 'package:otp_pin_field/otp_pin_field.dart';
-
 import '../../../core/consts/dimensions_constants.dart';
-import '../../../core/consts/string_consts.dart';
+import '../../../core/models/otp_arguments.dart';
+import '../../../core/routing/routes.dart';
+import '../cubit/forget_password_cubit.dart';
+import '../cubit/forget_password_states.dart';
 
 class ForgetPasswordOtp extends StatelessWidget {
-  const ForgetPasswordOtp({super.key});
+  final OtpArguments? arguments;
+  const ForgetPasswordOtp({super.key, required this.arguments});
 
   @override
   Widget build(BuildContext context) {
+    String userCode = '';
     return Scaffold(
       body: Container(
         color: backgroundColor,
@@ -29,7 +34,6 @@ class ForgetPasswordOtp extends StatelessWidget {
             SizedBox(
               height: edge,
             ),
-            SvgPicture.asset("$imageUrl/arrow_black.svg"),
             SizedBox(
               height: edge * 0.8,
             ),
@@ -71,11 +75,11 @@ class ForgetPasswordOtp extends StatelessWidget {
                     ),
                   ),
                   onSubmit: (v) {
-                    // context.read<ForgetPasswordCubit>().otpController.text =
-                    //  userCode;
+                    context.read<ForgetPasswordCubit>().otpController.text =
+                        userCode;
                   },
                   onChange: (v) {
-                    // userCode = v;
+                    userCode = v;
                   },
                 ),
               ),
@@ -83,28 +87,86 @@ class ForgetPasswordOtp extends StatelessWidget {
             SizedBox(
               height: edge * 4,
             ),
-            GoButton(fun: () {
-              context.pushNamed(Routes.resetPasswordScreen);
-            }, titleKey: easy.tr("check_otp")),
+            BlocConsumer<ForgetPasswordCubit, ForgetPasswordStates>(
+                buildWhen: (previous, current) => previous != current,
+                listenWhen: (previous, current) => previous != current,
+                builder: (context, current) {
+                  return GoButton(
+                      fun: () {
+                        context
+                            .read<ForgetPasswordCubit>()
+                            .checkOTP(arguments?.token ?? '');
+                      },
+                      loading: current is Loading,
+                      titleKey: easy.tr("check_otp"));
+                },
+                listener: (context, current) {
+                  current.whenOrNull(
+                    emptyInput: () {
+                      context.showErrorToast("empty_input".tr());
+                    },
+                    invalidInput: () {
+                      context.showErrorToast(
+                          '${context.read<ForgetPasswordCubit>().checkOtpResponse?.message?.getNameByLanguageCode()}');
+                    },
+                    success: (response) async {
+                      if (response is CheckOtpResponse) {
+                        context.pushNamedAndRemoveUntil(
+                            Routes.resetPasswordScreen,
+                            predicate: false);
+                      }
+                    },
+                    error: (error) {
+                      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+                        context.showErrorToast(error);
+                      });
+                    },
+                  );
+                }),
             SizedBox(
               height: edge,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TitleText(text: "don't_recieve".tr(),fontSize: 11, color: greyColor,),
+                TitleText(
+                  text: "don't_recieve".tr(),
+                  fontSize: 11,
+                  color: greyColor,
+                ),
                 SizedBox(
                   width: edge * 0.3,
                 ),
-                GestureDetector(
-                    onTap: () {
-                    //  context.pushNamed(Routes.loginScreen);
+                BlocConsumer<ForgetPasswordCubit, ForgetPasswordStates>(
+                    buildWhen: (previous, current) => previous != current,
+                    listenWhen: (previous, current) => previous != current,
+                    builder: (context, current) {
+                      return GestureDetector(
+                          onTap: () {
+                            context
+                                .read<ForgetPasswordCubit>()
+                                .resendOtp(arguments?.email);
+                          },
+                          child: TitleText(
+                            text: "resend_otp".tr(),
+                            color: lightBlue,
+                            fontSize: 11,
+                          ));
                     },
-                    child: TitleText(
-                      text: "resend_otp".tr(),
-                      color: lightBlue,
-                      fontSize: 11,
-                    ))
+                    listener: (context, current) {
+                         current.whenOrNull(
+                    success: (response) async {
+                      if (response is SendOtpResponse) {
+                       context.showSuccessToast(context.read<ForgetPasswordCubit>().sendOtpResponse?.message?.getNameByLanguageCode());
+                      }
+                    },
+                    error: (error) {
+                      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+                        context.showErrorToast(error);
+                      });
+                    },
+                  );
+                    })
               ],
             )
           ],

@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:modern_tech/core/helpers/extensions.dart';
 import 'package:modern_tech/core/theming/color_manager.dart';
 import 'package:modern_tech/core/widgets/go_button.dart';
@@ -10,7 +9,6 @@ import 'package:modern_tech/core/widgets/subtitle_text.dart';
 import 'package:modern_tech/core/widgets/title_text.dart';
 
 import '../../../core/consts/dimensions_constants.dart';
-import '../../../core/consts/string_consts.dart';
 import '../../../core/routing/routes.dart';
 
 class ResetPasswordScreen extends StatelessWidget {
@@ -31,7 +29,6 @@ class ResetPasswordScreen extends StatelessWidget {
             SizedBox(
               height: edge,
             ),
-            SvgPicture.asset("$imageUrl/arrow_black.svg"),
             SizedBox(
               height: edge * 0.8,
             ),

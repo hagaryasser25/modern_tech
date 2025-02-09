@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:modern_tech/core/models/otp_arguments.dart';
 //import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modern_tech/core/routing/routes.dart';
 import 'package:modern_tech/features/forget_password/cubit/forget_password_cubit.dart';
@@ -20,7 +21,7 @@ import '../di/dependency_injection.dart';
 
 class AppRouter {
   Route generateRoute(RouteSettings settings) {
-    //  final arguments = settings.arguments;
+     final arguments = settings.arguments;
 
     log('Navigating to: ${settings.name}');
 
@@ -53,7 +54,13 @@ class AppRouter {
         );
 
       case Routes.forgetPasswordOtp:
-        return _buildRoute(const ForgetPasswordOtp());
+      final otpArguments = arguments as OtpArguments;
+     
+        return _buildRoute(BlocProvider(
+          
+            create: (_) => getIt<ForgetPasswordCubit>(),
+            child: ForgetPasswordOtp(arguments: otpArguments,),
+          ),);
 
       case Routes.resetPasswordScreen:
         return _buildRoute(const ResetPasswordScreen());
