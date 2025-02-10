@@ -1,6 +1,8 @@
 import 'package:modern_tech/features/forget_password/data/model/check_otp_request.dart';
 import 'package:modern_tech/features/forget_password/data/model/send_otp_request.dart';
 import 'package:modern_tech/features/forget_password/data/model/send_otp_response.dart';
+import 'package:modern_tech/features/forget_password/data/model/update_password_request.dart';
+import 'package:modern_tech/features/forget_password/data/model/update_password_response.dart';
 
 import '../../../../core/networking/api_result.dart';
 import '../../../../core/networking/api_service.dart';
@@ -26,6 +28,16 @@ class ForgetPasswordRepo {
       CheckOtpRequest checkOtpRequest) async {
     try {
       var response = await _apiService.checkOtp(checkOtpRequest);
+      return ApiResult.success(response);
+    } catch (error) {
+      return ApiResult.failure(error.toString());
+    }
+  }
+
+    Future<ApiResult<UpdatePasswordResponse>> resetPassword(
+      UpdatePasswordRequest updatePasswordRequest) async {
+    try {
+      var response = await _apiService.updatePassword(updatePasswordRequest);
       return ApiResult.success(response);
     } catch (error) {
       return ApiResult.failure(error.toString());

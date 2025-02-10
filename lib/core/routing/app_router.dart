@@ -21,7 +21,7 @@ import '../di/dependency_injection.dart';
 
 class AppRouter {
   Route generateRoute(RouteSettings settings) {
-     final arguments = settings.arguments;
+    final arguments = settings.arguments;
 
     log('Navigating to: ${settings.name}');
 
@@ -47,23 +47,32 @@ class AppRouter {
 
       case Routes.forgetPasswordScreen:
         return _buildRoute(
-           BlocProvider(
+          BlocProvider(
             create: (_) => getIt<ForgetPasswordCubit>(),
             child: const ForgetPasswordScreen(),
           ),
         );
 
       case Routes.forgetPasswordOtp:
-      final otpArguments = arguments as OtpArguments;
-     
-        return _buildRoute(BlocProvider(
-          
+        final otpArguments = arguments as OtpArguments;
+
+        return _buildRoute(
+          BlocProvider(
             create: (_) => getIt<ForgetPasswordCubit>(),
-            child: ForgetPasswordOtp(arguments: otpArguments,),
-          ),);
+            child: ForgetPasswordOtp(
+              arguments: otpArguments,
+            ),
+          ),
+        );
 
       case Routes.resetPasswordScreen:
-        return _buildRoute(const ResetPasswordScreen());
+        final token = arguments as String;
+        return _buildRoute(
+          BlocProvider(
+            create: (_) => getIt<ForgetPasswordCubit>(),
+            child: ResetPasswordScreen(token: token),
+          ),
+        );
 
       default:
         return _buildRoute(

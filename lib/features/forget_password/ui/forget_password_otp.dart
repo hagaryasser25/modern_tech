@@ -113,6 +113,7 @@ class ForgetPasswordOtp extends StatelessWidget {
                       if (response is CheckOtpResponse) {
                         context.pushNamedAndRemoveUntil(
                             Routes.resetPasswordScreen,
+                            arguments: arguments?.token,
                             predicate: false);
                       }
                     },

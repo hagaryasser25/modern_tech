@@ -186,8 +186,8 @@ extension Navigation on BuildContext {
      duration: const Duration(seconds: 2),
      flushbarPosition: FlushbarPosition.BOTTOM,
      barBlur: .1,
-     backgroundColor: primaryColor,
-     borderColor: primaryColor,
+     backgroundColor: lightBlue,
+     borderColor: lightBlue,
      margin: const EdgeInsets.all(8),
      borderRadius: BorderRadius.circular(10),
    ).show(this);

@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:modern_tech/core/networking/api_constants.dart';
 import 'package:modern_tech/features/forget_password/data/model/send_otp_request.dart';
 import 'package:modern_tech/features/forget_password/data/model/send_otp_response.dart';
+import 'package:modern_tech/features/forget_password/data/model/update_password_request.dart';
+import 'package:modern_tech/features/forget_password/data/model/update_password_response.dart';
 import 'package:modern_tech/features/login/data/model/login_body_request.dart';
 import 'package:modern_tech/features/registertaion/data/model/register_body_request.dart';
 import 'package:modern_tech/features/registertaion/data/model/register_body_response.dart';
@@ -27,4 +29,7 @@ abstract class ApiService {
 
   @POST(ApiConstants.checkOtp)
   Future<CheckOtpResponse> checkOtp(@Body() CheckOtpRequest checkOtpRequest);
+
+  @POST(ApiConstants.resetPassword)
+  Future<UpdatePasswordResponse> updatePassword(@Body() UpdatePasswordRequest checkOtpRequest);
 }
