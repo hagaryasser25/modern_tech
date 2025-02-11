@@ -22,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
     // Navigate after 3 seconds
     Future.delayed(const Duration(seconds: 3), () {
      // ignore: use_build_context_synchronously
-     context.pushNamedAndRemoveUntil(Routes.registerationScreen, predicate: false);
+     context.pushNamedAndRemoveUntil(Routes.landingScreen, predicate: false);
     });
   }
   @override

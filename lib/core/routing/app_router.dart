@@ -10,6 +10,7 @@ import 'package:modern_tech/core/routing/routes.dart';
 import 'package:modern_tech/features/forget_password/cubit/forget_password_cubit.dart';
 import 'package:modern_tech/features/forget_password/ui/forget_password_screen.dart';
 import 'package:modern_tech/features/forget_password/ui/reset_password_screen.dart';
+import 'package:modern_tech/features/landing/landing_screen.dart';
 import 'package:modern_tech/features/login/cubit/login_cubit.dart';
 import 'package:modern_tech/features/login/ui/login_screen.dart';
 import 'package:modern_tech/features/registertaion/ui/registeration_screen.dart';
@@ -42,6 +43,14 @@ class AppRouter {
           BlocProvider(
             create: (_) => getIt<LoginCubit>(),
             child: const LoginScreen(),
+          ),
+        );
+
+          case Routes.landingScreen:
+        return _buildRoute(
+          BlocProvider(
+            create: (_) => getIt<LoginCubit>(),
+            child: const LandingScreen(),
           ),
         );
 

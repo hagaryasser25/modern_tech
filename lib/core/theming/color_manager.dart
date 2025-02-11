@@ -7,9 +7,11 @@ const Color borderColor =Color(0xFFEDF1F3);
 const Color primaryColor =Color(0xFF123CBF);
 const Color disableColor =Color(0xFF648DDB);
 const Color lightBlue =Color(0xFF4D81E7);
+const Color darkBlue =Color(0xFF1E3A8A);
 const Color googleButton =Color(0xFF1A1C1E);
 const Color greyColor =Color(0xFF989898);
 const Color lightGreyColor =Color(0xFFB3B3B3);
+const Color greyText =Color(0xFF8F9BB3);
 
 
 

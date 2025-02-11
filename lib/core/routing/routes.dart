@@ -5,5 +5,5 @@ class Routes {
   static const String forgetPasswordScreen = '/forgetPasswordScreen';
   static const String forgetPasswordOtp = '/forgetPasswordOtp';
   static const String resetPasswordScreen = '/resetPasswordScreen';
-
+  static const String landingScreen = '/landingScreen';
 }
