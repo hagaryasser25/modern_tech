@@ -6,6 +6,7 @@ import 'package:modern_tech/core/consts/landing_enum.dart';
 import 'package:modern_tech/core/consts/string_consts.dart';
 import 'package:modern_tech/core/theming/color_manager.dart';
 import 'package:modern_tech/core/widgets/title_text.dart';
+import 'package:modern_tech/features/home/home_screen.dart';
 
 import '../../core/consts/dimensions_constants.dart';
 
@@ -54,7 +55,7 @@ class _LandingScreenState extends State<LandingScreen> {
   ];
 
   final List<Widget> _screens = [
-    Center(child: const Text("home").tr()),
+    HomeScreen(),
     Center(child: const Text("book_service").tr()),
     Center(child: const Text("orders").tr()),
     Center(child: const Text("settings").tr()),
@@ -68,10 +69,12 @@ class _LandingScreenState extends State<LandingScreen> {
       bottomNavigationBar: Stack(
         children: [
           Container(
-            height: 150.h,
+            height: 115.h,
             width: double.infinity,
             decoration: const BoxDecoration(
+              color: Colors.transparent,
               image: DecorationImage(
+                
                 image: AssetImage('$imageUrl/bottom_nav.png'),
                 fit: BoxFit.cover,
               ),
@@ -81,29 +84,29 @@ class _LandingScreenState extends State<LandingScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: List.generate(
                   icons.length,
-                  (index) => Padding(
-                    padding: EdgeInsets.only(
-                        left: icons[index]['id'] == '2' ? 100.w : 40.w,
-                        right: icons[index]['id'] == '1' ? 40.w : 0,
-                        top: 60.h),
-                    child: GestureDetector(
-                        onTap: () {
+                  (index) => GestureDetector(
+                    onTap: () {
                           currentLandingIndex = LandingIndex.values[index];
                           setState(() {
-                            
                           });
                         },
-                        child: _buildNavBarItem(
-                            '${icons[index]['name']}',
-                            '${icons[index]['icon']}',
-                            '${icons[index]['index']}')),
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                          left: icons[index]['id'] == '2' ? 100.w : 40.w,
+                          right: icons[index]['id'] == '1' ? 40.w : 0,
+                          top: 40.h),
+                      child: _buildNavBarItem(
+                          '${icons[index]['name']}',
+                          '${icons[index]['icon']}',
+                          '${icons[index]['index']}','${icons[index]['id']}'),
+                    ),
                   ),
                 ),
               ),
             ),
           ),
           Positioned(
-              bottom: 70.h,
+              bottom: 60.h,
               right: 173.w, // Adjust the FAB position to overlap the bottom bar
               child: Container(
                 height: 50,
@@ -121,12 +124,13 @@ class _LandingScreenState extends State<LandingScreen> {
     );
   }
 
-  Widget _buildNavBarItem(String label, String iconPath, dynamic index) {
+  Widget _buildNavBarItem(String label, String iconPath, dynamic index, String id) {
     return Column(
       children: [
         SvgPicture.asset(
           iconPath,
-          height: 24,
+          height: 24, colorFilter:    ColorFilter.mode(
+                   (currentLandingIndex.index ) == int.parse(id) - 1 ? primaryColor : greyText, BlendMode.srcIn)  ,
         ),
         SizedBox(
           height: edge / 2,
@@ -134,96 +138,11 @@ class _LandingScreenState extends State<LandingScreen> {
         TitleText(
           text: label,
           fontSize: 10,
-          color: greyText,
+          color: (currentLandingIndex.index ) == int.parse(id) - 1 ? blackColor : greyText,
         ),
       ],
     );
   }
 
-/*
-  Widget _bottomNavBar() {
-    return CurvedNavBar(
-      actionButton: CurvedActionBar(
-          onTab: (value) {
-            /// perform action here
-          },
-          activeIcon: Container(
-            padding: const EdgeInsets.all(8),
-            decoration: const BoxDecoration(
-                color: Colors.white, shape: BoxShape.circle),
-            child: const Icon(
-              Icons.camera_alt,
-              size: 50,
-              color: Colors.orange,
-            ),
-          ),
-          inActiveIcon: Container(
-            padding: const EdgeInsets.all(8),
-            decoration: const BoxDecoration(
-                color: Colors.black, shape: BoxShape.circle),
-            child: const Icon(
-              Icons.camera_alt_outlined,
-              size: 50,
-              color: Colors.orange,
-            ),
-          ),
-          text: ""),
-      activeColor: Colors.blue,
-      navBarBackgroundColor: backgroundColor,
-      inActiveColor: Colors.black45,
-      appBarItems: [
-        FABBottomAppBarItem(
-            activeIcon: const Icon(
-              Icons.home,
-              color: primaryColor,
-            ),
-            inActiveIcon: const Icon(
-              Icons.home,
-              color: Colors.black26,
-            ),
-            text: ("home").tr()),
-        FABBottomAppBarItem(
-            activeIcon: const Icon(
-              Icons.wallet_giftcard,
-              color: Colors.blue,
-            ),
-            inActiveIcon: const Icon(
-              Icons.wallet_giftcard,
-              color: Colors.black26,
-            ),
-            text: ("book_service").tr()),
-        FABBottomAppBarItem(
-            activeIcon: const Icon(
-              Icons.wallet_giftcard,
-              color: Colors.blue,
-            ),
-            inActiveIcon: const Icon(
-              Icons.wallet_giftcard,
-              color: Colors.black26,
-            ),
-            text: ("orders").tr()),
-        FABBottomAppBarItem(
-            activeIcon: const Icon(
-              Icons.wallet_giftcard,
-              color: Colors.blue,
-            ),
-            inActiveIcon: const Icon(
-              Icons.wallet_giftcard,
-              color: Colors.black26,
-            ),
-            text: ("settings").tr())
-      ],
-      bodyItems: [
-        Center(child: const Text("home").tr()),
-        Center(child: const Text("book_service").tr()),
-        Center(child: const Text("orders").tr()),
-        Center(child: const Text("settings").tr()),
-      ],
-      actionBarView: Container(
-        height: MediaQuery.of(context).size.height,
-        color: Colors.orange,
-      ),
-    );
-  }
-  */
+
 }

@@ -38,7 +38,21 @@
     "home": "الرئيسية",
     "book_service": "أحجز الخدمة",
     "orders": "الطلبات",
-    "settings": "الاعدات"
+    "settings": "الاعدات",
+    "welcome": "مرحبا ",
+    "book_appointment": "أحجز موعد الصيانة",
+    "deliver_pieces": "شحن وتوصيل قطع غيار",
+    "replace_device": "استبدل جهازك القديم",
+    "buy_device": "شراء جهاز جديد",
+    "complains": "شكاوى و مقترحات",
+    "offers": "عروض وخصومات",
+    "work_offers": "فرص عمل",
+    "training_courses": "دورات تدريبية",
+    "contact_us": "تواصل معنا",
+    "logout": "تسجيل الخروج",
+    "our_service": "خدماتنا:",
+    "maintenance_adaptation": "صيانة التكيف",
+    "special_offers": "العروض المميزة:"
 
     
 }
